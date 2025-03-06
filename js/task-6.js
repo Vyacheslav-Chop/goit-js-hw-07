@@ -38,42 +38,45 @@ function getRandomHexColor() {
 // Після натискання на кнопку Destroy усі квадрати з div#boxes мають видалятися
 
 function createBoxes(amount) {
-  const boxes = document.querySelector('#boxes');
-  boxes.innerHTML = '';
+  const boxes = document.querySelector("#boxes");
+  boxes.innerHTML = "";
 
   let size = 30;
+  const elements = [];
 
   for (let i = 0; i < amount; i++) {
-    const newDiv = document.createElement('div');
+    const newDiv = document.createElement("div");
     newDiv.style.width = `${size}px`;
     newDiv.style.height = `${size}px`;
     newDiv.style.backgroundColor = getRandomHexColor();
-    boxes.append(newDiv);
+
+    elements.push(newDiv);
 
     size += 10;
   }
-};
+
+  boxes.append(...elements);
+}
 
 function destroyBoxes() {
-  const boxes = document.querySelector('#boxes');
-  boxes.innerHTML = '';
-};
+  const boxes = document.querySelector("#boxes");
+  boxes.innerHTML = "";
+}
 
 const input = document.querySelector('input[type="number"]');
-const btnCreate = document.querySelector('[data-create]');
-const btnDestroy = document.querySelector('[data-destroy]');
+const btnCreate = document.querySelector("[data-create]");
+const btnDestroy = document.querySelector("[data-destroy]");
 
-btnCreate.addEventListener('click', () => {
-
+btnCreate.addEventListener("click", () => {
   const amount = Number.parseFloat(input.value);
-  
+
   if (!isNaN(amount) && amount >= 1 && amount <= 100) {
     createBoxes(amount);
   }
 
-  input.value = '';
+  input.value = "";
 });
 
-btnDestroy.addEventListener('click', () => {
+btnDestroy.addEventListener("click", () => {
   destroyBoxes();
 });
